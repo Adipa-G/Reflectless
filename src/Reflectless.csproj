@@ -3,6 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <Company>Adipa Gunasekara</Company>
+    <Copyright>Adipa Gunasekara 2025</Copyright>
+    <Product>Reflectless</Product>
+    <Authors>Adipa Gunasekara</Authors>
+    <Version>1.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Description>Reflectless offers a high-performance solution for accessing properties and fields by name without relying on reflection. This approach delivers significantly faster execution compared to reflection-based methods.</Description>
+    <PackageProjectUrl>https://github.com/Adipa-G/reflectless/</PackageProjectUrl>
+    <PackageIconUrl>https://ssl.gstatic.com/codesite/ph/images/defaultlogo.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Adipa-G/reflectless/</RepositoryUrl>
+    <PackageId>Reflectless</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
 </Project>

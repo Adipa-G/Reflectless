@@ -29,7 +29,7 @@ namespace ReflectlessTests
         public void Generic_Property_Write_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetPropertyGetAccessor<PropertySetTest, int>("Unknown"));
+                Reflectless.Reflectless.GetPropertySetAccessor<PropertySetTest, int>("Unknown"));
 
             Assert.Equal("The property Unknown in type ReflectlessTests.TestClasses.PropertySetTest does not exists.", exception.Message);
         }

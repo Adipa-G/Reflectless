@@ -1,6 +1,6 @@
 ﻿namespace ReflectlessTests.TestClasses
 {
-    public class PropertyGetTest
+    public class PropertyGetDto
     {
         public int IntProperty => 10;
     }

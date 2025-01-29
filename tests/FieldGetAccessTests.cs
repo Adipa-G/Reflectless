@@ -9,17 +9,18 @@ namespace ReflectlessTests
         public void Non_Generic_Field_Read_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetFieldGetAccessor(typeof(FieldGetTest), "Unknown"));
+                Reflectless.Reflectless.GetFieldGetAccessor(typeof(FieldGetDto), "Unknown"));
 
-            Assert.Equal("The field Unknown in type ReflectlessTests.TestClasses.FieldGetTest does not exists.", exception.Message);
+            Assert.Equal($"The field Unknown in type {typeof(FieldGetDto).FullName} does not exists.",
+                exception.Message);
         }
 
         [Fact]
         public void Non_Generic_Field_Read_Success()
         {
-            var accessor = Reflectless.Reflectless.GetFieldGetAccessor(typeof(FieldGetTest), "IntField");
+            var accessor = Reflectless.Reflectless.GetFieldGetAccessor(typeof(FieldGetDto),  nameof(FieldGetDto.IntField));
 
-            var testObj = new FieldGetTest();
+            var testObj = new FieldGetDto();
             var value = accessor.Invoke(testObj);
 
             Assert.Equal(10, value);
@@ -29,17 +30,17 @@ namespace ReflectlessTests
         public void Generic_Field_Read_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetFieldGetAccessor<FieldGetTest, int>("Unknown"));
+                Reflectless.Reflectless.GetFieldGetAccessor<FieldGetDto, int>("Unknown"));
 
-            Assert.Equal("The field Unknown in type ReflectlessTests.TestClasses.FieldGetTest does not exists.", exception.Message);
+            Assert.Equal($"The field Unknown in type {typeof(FieldGetDto).FullName} does not exists.", exception.Message);
         }
 
         [Fact]
         public void Generic_Field_Read_Success()
         {
-            var accessor = Reflectless.Reflectless.GetFieldGetAccessor<FieldGetTest, int>("IntField");
+            var accessor = Reflectless.Reflectless.GetFieldGetAccessor<FieldGetDto, int>(nameof(FieldGetDto.IntField));
 
-            var testObj = new FieldGetTest();
+            var testObj = new FieldGetDto();
             var value = accessor.Invoke(testObj);
 
             Assert.Equal(10, value);

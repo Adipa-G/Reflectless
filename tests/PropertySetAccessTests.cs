@@ -9,40 +9,40 @@ namespace ReflectlessTests
         public void Non_Generic_Property_Write_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetPropertySetAccessor(typeof(PropertySetTest), "Unknown"));
+                Reflectless.Reflectless.GetPropertySetAccessor(typeof(PropertySetDto), "Unknown"));
 
-            Assert.Equal("The property Unknown in type ReflectlessTests.TestClasses.PropertySetTest does not exists.", exception.Message);
+            Assert.Equal($"The property Unknown in type {typeof(PropertySetDto).FullName} does not exists.", exception.Message);
         }
 
         [Fact]
         public void Non_Generic_Property_Write_Success()
         {
-            var accessor = Reflectless.Reflectless.GetPropertySetAccessor(typeof(PropertySetTest), "IntProperty");
+            var accessor = Reflectless.Reflectless.GetPropertySetAccessor(typeof(PropertySetDto), nameof(PropertySetDto.StrProperty));
 
-            var testObj = new PropertySetTest();
-            accessor.Invoke(testObj, 20);
+            var testObj = new PropertySetDto();
+            accessor.Invoke(testObj, "Updated Value");
 
-            Assert.Equal(20, testObj.IntProperty);
+            Assert.Equal("Updated Value", testObj.StrProperty);
         }
 
         [Fact]
         public void Generic_Property_Write_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetPropertySetAccessor<PropertySetTest, int>("Unknown"));
+                Reflectless.Reflectless.GetPropertySetAccessor<PropertySetDto, string>("Unknown"));
 
-            Assert.Equal("The property Unknown in type ReflectlessTests.TestClasses.PropertySetTest does not exists.", exception.Message);
+            Assert.Equal($"The property Unknown in type {typeof(PropertySetDto).FullName} does not exists.", exception.Message);
         }
 
         [Fact]
         public void Generic_Property_Write_Success()
         {
-            var accessor = Reflectless.Reflectless.GetPropertySetAccessor<PropertySetTest, int>("IntProperty");
+            var accessor = Reflectless.Reflectless.GetPropertySetAccessor<PropertySetDto, string>(nameof(PropertySetDto.StrProperty));
 
-            var testObj = new PropertySetTest();
-            accessor.Invoke(testObj, 20);
+            var testObj = new PropertySetDto();
+            accessor.Invoke(testObj, "Updated Value");
 
-            Assert.Equal(20, testObj.IntProperty);
+            Assert.Equal("Updated Value", testObj.StrProperty);
         }
     }
 }

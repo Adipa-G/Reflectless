@@ -15,13 +15,12 @@ namespace Reflectless
 
             var classTypeExpr = Expression.Parameter(typeof(object), "clsType");
             var inputParamTypeExpr = Expression.Parameter(typeof(object), "inputType");
+            var callExpr = Expression.Call(Expression.Convert(classTypeExpr, type), property.SetMethod,
+                Expression.Convert(inputParamTypeExpr, property.PropertyType));
+            var lambdaExpr = Expression.Lambda<Action<object, object>>(Expression.Convert(callExpr, typeof(void)),
+                classTypeExpr, inputParamTypeExpr);
 
-            var expr = Expression.Lambda<Action<object, object>>(Expression.Convert(
-                    Expression.Call(Expression.Convert(classTypeExpr, type), property.SetMethod,
-                        Expression.Convert(inputParamTypeExpr, property.PropertyType)), typeof(void)), classTypeExpr,
-                inputParamTypeExpr);
-
-            return expr.Compile();
+            return lambdaExpr.Compile();
         }
 
         internal static Action<TClass, TMember> GetPropertySetAccessor<TClass, TMember>(string name)
@@ -34,12 +33,12 @@ namespace Reflectless
 
             var classTypeExpr = Expression.Parameter(typeof(TClass), "clsType");
             var inputParamTypeExpr = Expression.Parameter(typeof(TMember), "inputType");
-
-            Expression<Action<TClass, TMember>> expr = Expression.Lambda<Action<TClass, TMember>>(
-                Expression.Convert(Expression.Call(classTypeExpr, property.SetMethod, inputParamTypeExpr),
+            var callExpr = Expression.Call(classTypeExpr, property.SetMethod, inputParamTypeExpr);
+            var lambdaExpr = Expression.Lambda<Action<TClass, TMember>>(
+                Expression.Convert(callExpr,
                     typeof(void)), classTypeExpr, inputParamTypeExpr);
 
-            return expr.Compile();
+            return lambdaExpr.Compile();
         }
     }
 }

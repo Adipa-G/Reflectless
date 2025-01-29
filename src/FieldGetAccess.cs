@@ -14,12 +14,11 @@ namespace Reflectless
             }
 
             var classTypeExpr = Expression.Parameter(typeof(object), "clsType");
-
-            var expr = Expression.Lambda<Func<object, object>>(
-                Expression.Convert(Expression.Field(Expression.Convert(classTypeExpr, type), name), typeof(object)),
+            var fieldExpr = Expression.Field(Expression.Convert(classTypeExpr, type), name);
+            var lambdaExpr = Expression.Lambda<Func<object, object>>(Expression.Convert(fieldExpr, typeof(object)),
                 classTypeExpr);
 
-            return expr.Compile();
+            return lambdaExpr.Compile();
         }
 
         internal static Func<TClass, TMember> GetFieldGetAccessor<TClass, TMember>(string name)
@@ -31,11 +30,12 @@ namespace Reflectless
             }
 
             var classTypeExpr = Expression.Parameter(typeof(TClass), "clsType");
-            
-            var expr = Expression.Lambda<Func<TClass, TMember>>(
-                Expression.Convert(Expression.Field(classTypeExpr, name), field.FieldType), classTypeExpr);
+            var fieldExpr = Expression.Field(classTypeExpr, name);
 
-            return expr.Compile();
+            var lambdaExpr = Expression.Lambda<Func<TClass, TMember>>(Expression.Convert(fieldExpr, field.FieldType),
+                classTypeExpr);
+
+            return lambdaExpr.Compile();
         }
     }
 }

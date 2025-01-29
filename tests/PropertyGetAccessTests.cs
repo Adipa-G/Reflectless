@@ -9,17 +9,17 @@ namespace ReflectlessTests
         public void Non_Generic_Property_Read_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetPropertyGetAccessor(typeof(PropertyGetTest), "Unknown"));
+                Reflectless.Reflectless.GetPropertyGetAccessor(typeof(PropertyGetDto), "Unknown"));
 
-            Assert.Equal("The property Unknown in type ReflectlessTests.TestClasses.PropertyGetTest does not exists.", exception.Message);
+            Assert.Equal($"The property Unknown in type {typeof(PropertyGetDto).FullName} does not exists.", exception.Message);
         }
 
         [Fact]
         public void Non_Generic_Property_Read_Success()
         {
-            var accessor = Reflectless.Reflectless.GetPropertyGetAccessor(typeof(PropertyGetTest), "IntProperty");
+            var accessor = Reflectless.Reflectless.GetPropertyGetAccessor(typeof(PropertyGetDto), nameof(PropertyGetDto.IntProperty));
 
-            var testObj = new PropertyGetTest();
+            var testObj = new PropertyGetDto();
             var value = accessor.Invoke(testObj);
 
             Assert.Equal(10, value);
@@ -29,17 +29,17 @@ namespace ReflectlessTests
         public void Generic_Property_Read_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetPropertyGetAccessor<PropertyGetTest,int>("Unknown"));
+                Reflectless.Reflectless.GetPropertyGetAccessor<PropertyGetDto,int>("Unknown"));
 
-            Assert.Equal("The property Unknown in type ReflectlessTests.TestClasses.PropertyGetTest does not exists.", exception.Message);
+            Assert.Equal($"The property Unknown in type {typeof(PropertyGetDto).FullName} does not exists.", exception.Message);
         }
 
         [Fact]
         public void Generic_Property_Read_Success()
         {
-            var accessor = Reflectless.Reflectless.GetPropertyGetAccessor<PropertyGetTest, int>("IntProperty");
+            var accessor = Reflectless.Reflectless.GetPropertyGetAccessor<PropertyGetDto, int>(nameof(PropertyGetDto.IntProperty));
 
-            var testObj = new PropertyGetTest();
+            var testObj = new PropertyGetDto();
             var value = accessor.Invoke(testObj);
 
             Assert.Equal(10, value);

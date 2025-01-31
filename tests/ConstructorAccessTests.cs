@@ -20,7 +20,7 @@ namespace ReflectlessTests
         {
             var accessor = Reflectless.Reflectless.GetDefaultConstructorAccessor(typeof(DefaultConstructorDto));
 
-            var value = accessor.Invoke() as DefaultConstructorDto;
+            var value = accessor() as DefaultConstructorDto;
 
             Assert.NotNull(value);
             Assert.Equal("X", value.Name);
@@ -42,7 +42,7 @@ namespace ReflectlessTests
             var accessor =
                 Reflectless.Reflectless.GetConstructorAccessor<Func<object,object>>(typeof(ConstructorWithParametersDto), typeof(string));
 
-            var value = accessor.Invoke("A") as ConstructorWithParametersDto;
+            var value = accessor("A") as ConstructorWithParametersDto;
 
             Assert.NotNull(value);
             Assert.Equal("A", value.Name1);
@@ -55,7 +55,7 @@ namespace ReflectlessTests
                 Reflectless.Reflectless.GetConstructorAccessor<Func<object, object, object>>(
                     typeof(ConstructorWithParametersDto), typeof(string), typeof(string));
 
-            var value = accessor.Invoke("A","B") as ConstructorWithParametersDto;
+            var value = accessor("A","B") as ConstructorWithParametersDto;
 
             Assert.NotNull(value);
             Assert.Equal("A", value.Name1);
@@ -67,7 +67,7 @@ namespace ReflectlessTests
         {
             var accessor = Reflectless.Reflectless.GetDefaultConstructorAccessor<DefaultConstructorDto>();
 
-            var value = accessor.Invoke();
+            var value = accessor();
 
             Assert.NotNull(value);
             Assert.Equal("X", value.Name);
@@ -79,7 +79,7 @@ namespace ReflectlessTests
             var accessor =
                 Reflectless.Reflectless.GetConstructorAccessor<Func<string,ConstructorWithParametersDto>>();
 
-            var value = accessor.Invoke("A");
+            var value = accessor("A");
 
             Assert.NotNull(value);
             Assert.Equal("A", value.Name1);
@@ -91,7 +91,7 @@ namespace ReflectlessTests
             var accessor =
                 Reflectless.Reflectless.GetConstructorAccessor<Func<string, string, ConstructorWithParametersDto>>();
 
-            var value = accessor.Invoke("A", "B");
+            var value = accessor("A", "B");
 
             Assert.NotNull(value);
             Assert.Equal("A", value.Name1);

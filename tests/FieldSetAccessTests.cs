@@ -20,7 +20,7 @@ namespace ReflectlessTests
             var accessor = Reflectless.Reflectless.GetFieldSetAccessor(typeof(FieldSetDto), nameof(FieldSetDto.StrField));
 
             var testObj = new FieldSetDto();
-            accessor.Invoke(testObj, "Updated Value");
+            accessor(testObj, "Updated Value");
 
             Assert.Equal("Updated Value", testObj.StrField);
         }
@@ -40,7 +40,7 @@ namespace ReflectlessTests
             var accessor = Reflectless.Reflectless.GetFieldSetAccessor<FieldSetDto, string>(nameof(FieldSetDto.StrField));
 
             var testObj = new FieldSetDto();
-            accessor.Invoke(testObj, "Updated Value");
+            accessor(testObj, "Updated Value");
 
             Assert.Equal("Updated Value", testObj.StrField);
         }

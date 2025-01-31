@@ -20,7 +20,7 @@ namespace ReflectlessTests
             var accessor = Reflectless.Reflectless.GetPropertyGetAccessor(typeof(PropertyGetDto), nameof(PropertyGetDto.IntProperty));
 
             var testObj = new PropertyGetDto();
-            var value = accessor.Invoke(testObj);
+            var value = accessor(testObj);
 
             Assert.Equal(10, value);
         }
@@ -40,7 +40,7 @@ namespace ReflectlessTests
             var accessor = Reflectless.Reflectless.GetPropertyGetAccessor<PropertyGetDto, int>(nameof(PropertyGetDto.IntProperty));
 
             var testObj = new PropertyGetDto();
-            var value = accessor.Invoke(testObj);
+            var value = accessor(testObj);
 
             Assert.Equal(10, value);
         }

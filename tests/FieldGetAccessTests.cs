@@ -21,7 +21,7 @@ namespace ReflectlessTests
             var accessor = Reflectless.Reflectless.GetFieldGetAccessor(typeof(FieldGetDto),  nameof(FieldGetDto.IntField));
 
             var testObj = new FieldGetDto();
-            var value = accessor.Invoke(testObj);
+            var value = accessor(testObj);
 
             Assert.Equal(10, value);
         }
@@ -41,7 +41,7 @@ namespace ReflectlessTests
             var accessor = Reflectless.Reflectless.GetFieldGetAccessor<FieldGetDto, int>(nameof(FieldGetDto.IntField));
 
             var testObj = new FieldGetDto();
-            var value = accessor.Invoke(testObj);
+            var value = accessor(testObj);
 
             Assert.Equal(10, value);
         }

@@ -22,34 +22,35 @@ namespace Reflectless
             return GetConstructorAccessor<TFunc>(returnType, parameters);
         }
 
-        internal static TFunc GetConstructorAccessor<TFunc>(Type type, params Type[]? constructionParameterTypes)
+        internal static TFunc GetConstructorAccessor<TFunc>(Type type, params Type[]? constructorParameterTypes)
         {
-            var constructor = type.GetConstructor(constructionParameterTypes);
+            var constructor = type.GetConstructor(constructorParameterTypes);
             if (constructor == null)
             {
-                var constructorDetails = constructionParameterTypes == null || constructionParameterTypes.Length == 0
+                var constructorDetails = constructorParameterTypes == null || constructorParameterTypes.Length == 0
                     ? null
-                    : $"constructor with parameters [{string.Join(",", constructionParameterTypes.Select(t => t.Name))}]";
+                    : $"constructor with parameters [{string.Join(",", constructorParameterTypes.Select(t => t.Name))}]";
                 constructorDetails ??= "default constructor";
                 throw new Exception($"The {constructorDetails} in type {type.FullName} does not exists.");
             }
 
-            var inputParameterTypeExprList = new List<ParameterExpression>();
-            var constructorParameterTypeExprList = new List<Expression>();
-            if (constructionParameterTypes != null)
+            var lambdaInputParameterExprList = new List<ParameterExpression>();
+            var callInputParameterExprList = new List<Expression>();
+
+            if (constructorParameterTypes != null)
             {
-                for (var index = 0; index < constructionParameterTypes.Length; index++)
+                for (var index = 0; index < constructorParameterTypes.Length; index++)
                 {
-                    var constructionParameterType = constructionParameterTypes[index];
+                    var constructionParameterType = constructorParameterTypes[index];
 
                     var parameterExpression = Expression.Parameter(typeof(object), $"inputType{index}");
-                    inputParameterTypeExprList.Add(parameterExpression);
-                    constructorParameterTypeExprList.Add(Expression.Convert(parameterExpression, constructionParameterType));
+                    lambdaInputParameterExprList.Add(parameterExpression);
+                    callInputParameterExprList.Add(Expression.Convert(parameterExpression, constructionParameterType));
                 }
             }
 
-            var newExpr = Expression.New(constructor, constructorParameterTypeExprList);
-            var lambdaExpr = Expression.Lambda<TFunc>(newExpr, inputParameterTypeExprList.ToArray());
+            var newExpr = Expression.New(constructor, callInputParameterExprList);
+            var lambdaExpr = Expression.Lambda<TFunc>(newExpr, lambdaInputParameterExprList.ToArray());
 
             return lambdaExpr.Compile();
         }

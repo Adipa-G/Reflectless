@@ -236,6 +236,38 @@ public class Example
 //Generic : John Wick's Dog
 ```
 
+## Benchmark Results
+
+There is a benchmark project in the solution, and the benchmark run produced the following results. The comparison shows that using Reflectless is significantly faster than Reflection.
+
+| Type                 |    Method                  | N     | Mean          | Error         | StdDev       | Gen0    | Allocated |
+|--------------------- |--------------------------- |------ |--------------:|--------------:|-------------:|--------:|----------:|
+| BenchmarkPropertyGet |    Reflection_GetProperty  | 1000  |  11,331.68 ns |    255.813 ns |   213.615 ns |  1.7090 |   24000 B |
+| BenchmarkPropertyGet |    Reflectless_GetProperty | 1000  |   5,093.91 ns |    230.052 ns |   225.942 ns |  1.7090 |   24000 B |
+| BenchmarkPropertyGet |    Reflection_GetProperty  | 10000 | 126,646.70 ns | 10,166.555 ns | 9,984.916 ns | 19.0430 |  240002 B |
+| BenchmarkPropertyGet |    Reflectless_GetProperty | 10000 |  43,246.86 ns |  1,983.637 ns | 1,656.426 ns | 19.0430 |  240000 B |
+| BenchmarkPropertySet |    Reflection_SetProperty  | 1000  |  19,736.30 ns |    852.026 ns |   796.986 ns |  4.3945 |   56000 B |
+| BenchmarkPropertySet |    Reflectless_SetProperty | 1000  |   5,326.45 ns |    269.042 ns |   264.235 ns |  1.7090 |   24000 B |
+| BenchmarkPropertySet |    Reflection_SetProperty  | 10000 | 188,452.03 ns |  4,535.729 ns | 4,242.724 ns | 44.4336 |  560002 B |
+| BenchmarkPropertySet |    Reflectless_SetProperty | 10000 |  47,436.37 ns |    825.329 ns |   810.583 ns | 19.0430 |  240000 B |
+| BenchmarkFieldGet    |    Reflection_GetField     | 1000  |  33,106.71 ns |    289.840 ns |   271.117 ns |  1.7090 |   24000 B |
+| BenchmarkFieldGet    |    Reflectless_GetField    | 1000  |   4,913.20 ns |    198.384 ns |   194.839 ns |  1.7090 |   24000 B |
+| BenchmarkFieldGet    |    Reflection_GetField     | 10000 | 332,773.66 ns |  5,139.859 ns | 5,048.029 ns | 19.0430 |  240002 B |
+| BenchmarkFieldGet    |    Reflectless_GetField    | 10000 |  45,000.30 ns |  1,190.955 ns | 1,169.677 ns | 19.0430 |  240002 B |
+| BenchmarkFieldSet    |    Reflection_SetField     | 1000  |  30,849.02 ns |    503.023 ns |   494.036 ns |  1.7090 |   24000 B |
+| BenchmarkFieldSet    |    Reflectless_SetField    | 1000  |   5,419.15 ns |    392.748 ns |   385.731 ns |  1.7090 |   24000 B |
+| BenchmarkFieldSet    |    Reflection_SetField     | 10000 | 315,256.09 ns |  6,052.070 ns | 5,365.003 ns | 19.0430 |  240002 B |
+| BenchmarkFieldSet    |    Reflectless_SetField    | 10000 |  49,378.96 ns |    655.125 ns |   612.804 ns | 19.0430 |  240000 B |
+| BenchmarkConstructor |    Reflection_Construct    | 1000  |      11.59 ns |      0.557 ns |     0.521 ns |       - |         - |
+| BenchmarkConstructor |    Reflectless_Construct   | 1000  |      11.70 ns |      0.864 ns |     0.849 ns |       - |         - |
+| BenchmarkConstructor |    Reflection_Construct    | 10000 |      11.50 ns |      0.531 ns |     0.497 ns |       - |         - |
+| BenchmarkConstructor |    Reflectless_Construct   | 10000 |      11.37 ns |      0.553 ns |     0.518 ns |       - |         - |
+| BenchmarkMethod      |    Reflection_Method       | 1000  |  23,515.63 ns |  1,655.880 ns | 1,626.296 ns |  6.3477 |   80000 B |
+| BenchmarkMethod      |    Reflectless_Method      | 1000  |  10,081.17 ns |    699.538 ns |   687.040 ns |  3.6621 |   48000 B |
+| BenchmarkMethod      |    Reflection_Method       | 10000 | 252,679.33 ns |  8,216.750 ns | 8,069.947 ns | 63.7207 |  800002 B |
+| BenchmarkMethod      |    Reflectless_Method      | 10000 |  78,824.49 ns |  9,074.282 ns | 8,488.089 ns | 38.0859 |  480000 B |
+
+
 ## License
 
 Reflectless is licensed under the [MIT License](LICENSE).

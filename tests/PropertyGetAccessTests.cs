@@ -29,7 +29,7 @@ namespace ReflectlessTests
         public void Generic_Property_Read_When_Property_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetPropertyGetAccessor<PropertyGetDto,int>("Unknown"));
+                Reflectless.Reflectless.GetPropertyGetAccessor<PropertyGetDto, int>("Unknown"));
 
             Assert.Equal($"The property Unknown in type {typeof(PropertyGetDto).FullName} does not exists.", exception.Message);
         }

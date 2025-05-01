@@ -1,13 +1,13 @@
-﻿using System.Reflection;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using ReflectlessBenchmark.TestClasses;
+using System.Reflection;
 
 public class BenchmarkPropertySet
 {
     private IList<TestDto> _testDtoList;
-    
+
     private MethodInfo PropertySetMethod { get; set; }
-    private Action<object,object> PropertySetAccessor { get; set; }
+    private Action<object, object> PropertySetAccessor { get; set; }
 
     public BenchmarkPropertySet()
     {

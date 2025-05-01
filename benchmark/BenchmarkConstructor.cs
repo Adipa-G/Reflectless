@@ -1,21 +1,21 @@
-﻿using System.Reflection;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using ReflectlessBenchmark.TestClasses;
+using System.Reflection;
 
 public class BenchmarkConstructor
 {
     private IList<TestDto> _testDtoList;
-    
+
     private ConstructorInfo ConstructorInfo { get; set; }
     private Func<object, object> ConstructorAccessor { get; set; }
 
     public BenchmarkConstructor()
     {
         ConstructorInfo = typeof(TestDto).GetConstructor(new[] { typeof(int) });
-        ConstructorAccessor = Reflectless.Reflectless.GetConstructorAccessor<Func<object,object>>(typeof(TestDto), new []{typeof(int)});
+        ConstructorAccessor = Reflectless.Reflectless.GetConstructorAccessor<Func<object, object>>(typeof(TestDto), new[] { typeof(int) });
     }
 
-    [Params(1000,10000)]
+    [Params(1000, 10000)]
     public int N;
 
     [GlobalSetup]

@@ -30,7 +30,7 @@ namespace ReflectlessTests
         public void Non_Generic_Parameterised_Constructor_Not_Exists_Throws()
         {
             var exception = Assert.Throws<Exception>(() =>
-                Reflectless.Reflectless.GetConstructorAccessor<Func<object,object>>(typeof(ConstructorWithParametersDto), typeof(int)));
+                Reflectless.Reflectless.GetConstructorAccessor<Func<object, object>>(typeof(ConstructorWithParametersDto), typeof(int)));
 
             Assert.Equal($"The constructor with parameters [Int32] in type {typeof(ConstructorWithParametersDto).FullName} does not exists.",
                 exception.Message);
@@ -40,7 +40,7 @@ namespace ReflectlessTests
         public void Non_Generic_Parameterised_Constructor_Initialise()
         {
             var accessor =
-                Reflectless.Reflectless.GetConstructorAccessor<Func<object,object>>(typeof(ConstructorWithParametersDto), typeof(string));
+                Reflectless.Reflectless.GetConstructorAccessor<Func<object, object>>(typeof(ConstructorWithParametersDto), typeof(string));
 
             var value = accessor("A") as ConstructorWithParametersDto;
 
@@ -55,7 +55,7 @@ namespace ReflectlessTests
                 Reflectless.Reflectless.GetConstructorAccessor<Func<object, object, object>>(
                     typeof(ConstructorWithParametersDto), typeof(string), typeof(string));
 
-            var value = accessor("A","B") as ConstructorWithParametersDto;
+            var value = accessor("A", "B") as ConstructorWithParametersDto;
 
             Assert.NotNull(value);
             Assert.Equal("A", value.Name1);
@@ -77,7 +77,7 @@ namespace ReflectlessTests
         public void Generic_Parameterised_Constructor_Initialise()
         {
             var accessor =
-                Reflectless.Reflectless.GetConstructorAccessor<Func<string,ConstructorWithParametersDto>>();
+                Reflectless.Reflectless.GetConstructorAccessor<Func<string, ConstructorWithParametersDto>>();
 
             var value = accessor("A");
 

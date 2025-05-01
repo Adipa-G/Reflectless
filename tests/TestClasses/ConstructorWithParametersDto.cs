@@ -5,7 +5,7 @@
         public string Name1 { get; }
 
         public string Name2 { get; }
-        
+
         public ConstructorWithParametersDto(string name1)
         {
             Name1 = name1;

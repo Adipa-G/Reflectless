@@ -1,11 +1,11 @@
-﻿using System.Reflection;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using ReflectlessBenchmark.TestClasses;
+using System.Reflection;
 
 public class BenchmarkMethod
 {
     private IList<TestDto> _testDtoList;
-    
+
     private MethodInfo MethodInfo { get; set; }
     private Func<object, object, object> MethodAccessor { get; set; }
 
@@ -18,13 +18,13 @@ public class BenchmarkMethod
         _testDtoList = new List<TestDto>();
     }
 
-    [Params(1000,10000)]
+    [Params(1000, 10000)]
     public int N;
 
     [GlobalSetup]
     public void Setup()
     {
-        for(int i = 0; i < N; i++)
+        for (int i = 0; i < N; i++)
         {
             _testDtoList.Add(new TestDto() { IntProperty = i });
         }

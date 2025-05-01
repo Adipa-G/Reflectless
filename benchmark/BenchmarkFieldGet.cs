@@ -1,13 +1,13 @@
-﻿using System.Reflection;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using ReflectlessBenchmark.TestClasses;
+using System.Reflection;
 
 public class BenchmarkFieldGet
 {
     private IList<TestDto> _testDtoList;
-    
+
     private FieldInfo FieldInfo { get; set; }
-    private Func<object,object> FieldGetAccessor { get; set; }
+    private Func<object, object> FieldGetAccessor { get; set; }
 
     public BenchmarkFieldGet()
     {
@@ -17,7 +17,7 @@ public class BenchmarkFieldGet
         _testDtoList = new List<TestDto>();
     }
 
-    [Params(1000,10000)]
+    [Params(1000, 10000)]
     public int N;
 
     [GlobalSetup]

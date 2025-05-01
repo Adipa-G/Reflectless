@@ -29,7 +29,7 @@ namespace ReflectlessTests
         [Fact]
         public void Non_Generic_Method_With_No_Parameters_With_Return_Type_Calls()
         {
-            var action = Reflectless.Reflectless.GetMethodAccessor<Func<object,object>>(typeof(MethodDto), nameof(MethodDto.MethodWithNoParametersHasReturns));
+            var action = Reflectless.Reflectless.GetMethodAccessor<Func<object, object>>(typeof(MethodDto), nameof(MethodDto.MethodWithNoParametersHasReturns));
 
             var testObj = new MethodDto();
             var result = action(testObj);

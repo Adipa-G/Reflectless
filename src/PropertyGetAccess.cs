@@ -33,7 +33,7 @@ namespace Reflectless
             var callExpr = Expression.Call(classTypeExpr, property.GetMethod);
             var lambdaExpr =
                 Expression.Lambda<Func<TClass, TMember>>(Expression.Convert(callExpr, typeof(TMember)), classTypeExpr);
-            
+
             return lambdaExpr.Compile();
         }
     }

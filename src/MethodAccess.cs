@@ -1,7 +1,7 @@
-﻿using System.Linq.Expressions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Reflectless
@@ -44,7 +44,7 @@ namespace Reflectless
             var funcType = typeof(TFuncOrAction);
             var typeArguments = funcType.GetGenericArguments();
             var returnTypeParameter = method.ReturnType == typeof(void) ? typeof(void) : typeArguments[^1];
-            
+
             for (var index = 0; index < types.Count; index++)
             {
                 var methodParameterType = types[index];
@@ -57,9 +57,9 @@ namespace Reflectless
                 }
             }
 
-            var callExpr = Expression.Call(Expression.Convert(lambdaInputParameterExprList[0], type) , method, callInputParameterExprList);
+            var callExpr = Expression.Call(Expression.Convert(lambdaInputParameterExprList[0], type), method, callInputParameterExprList);
             var lambdaExpr = Expression.Lambda<TFuncOrAction>(Expression.Convert(callExpr, returnTypeParameter), lambdaInputParameterExprList);
-            
+
             return lambdaExpr.Compile();
         }
     }

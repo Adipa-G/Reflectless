@@ -18,7 +18,7 @@ namespace ReflectlessTests
         [Fact]
         public void Non_Generic_Field_Read_Success()
         {
-            var accessor = Reflectless.Reflectless.GetFieldGetAccessor(typeof(FieldGetDto),  nameof(FieldGetDto.IntField));
+            var accessor = Reflectless.Reflectless.GetFieldGetAccessor(typeof(FieldGetDto), nameof(FieldGetDto.IntField));
 
             var testObj = new FieldGetDto();
             var value = accessor(testObj);
